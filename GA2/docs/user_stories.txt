@@ -1,4 +1,4 @@
 This text file contains a list of the 4 user stories chosen for implementation and testing.
 
-1. As a user I want to be able to register as a teacher and adver\se private lessons to be
-able to help students be[er understand the course.
+1. As a user I want to be able to register as a teacher and advertise private lessons to be 
+able to help students better understand the course.
