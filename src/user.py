@@ -1,8 +1,8 @@
-
+#!/bin/python3.11
 
 class User:
     all_users = []
-    def __init__(self, name = "", role = "Student", courses = [],username = "", id = 0, password = "", email = "", feed = [], friends = []):
+    def __init__(self, name = "", role = "Student", courses = [],username = "",feed = [], friends = [], email = "",id = 0, password = ""):
         self.name = name
         self.username = username
         self.id = id
@@ -44,15 +44,16 @@ class User:
             Problem : {problem}
             If you have the answer, please contact me at {self.email}"""
             if visible_to == "Everyone":
-                everyone = User.all_users()
+                everyone = User.get_all_users()
                 for user in everyone:
-                    user.feed.append(post)
+                    user.feed.append(problem)
                 print(post)
+                return True
             else:
                 for friend in self.friends:
-                    friend.feed.append(post)
+                    friend.feed.append(problem)
                 print(post)
-            return True
+                return True
 
 
 
