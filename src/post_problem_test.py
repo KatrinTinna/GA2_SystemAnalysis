@@ -15,8 +15,8 @@ class TestPostProblem(unittest.TestCase):
         result = user.post_problem(problem, "Friends")
         print(result)
         self.assertTrue(result)
-        # for friend in user.friends:
-        #     self.assertIn(problem, friend.feed)
+        for friend in user.friends:
+            self.assertIn(problem, friend.feed)
 
     
     def test_post_empty_problem(self):
@@ -42,8 +42,9 @@ class TestPostProblem(unittest.TestCase):
         user = User("Katrín", "Student", ["Math"], "katrins",[], [], "Katrins@ru.is")
         problem = "How do I make a sequence diagram?"
         result = user.post_problem(problem)  
-        self.assertFalse(result)
+        self.assertTrue(result)
         all_user = User.get_all_users()
+        print(all_user)
         for user in all_user:
             self.assertIn(problem, user.feed)
 
@@ -55,7 +56,7 @@ class TestPostProblem(unittest.TestCase):
         user2 = User("Arna")
         user3 = User("Hera")
         user = User("Katrín", "Student", ["Math"], "katrins",[], [user1, user2, user3])
-        problem = "How do I make a sequence diagram?"
+        problem = "How do I learn about the WW2"
         result = user.post_problem(problem)  
         self.assertFalse(result)
         for user in user.friends:
@@ -69,7 +70,7 @@ class TestPostProblem(unittest.TestCase):
         user2 = User("Arna")
         user3 = User("Hera")
         user = User("Katrín", "Student", ["Math"], "katrins",[], [user1, user2, user3], "Katrins23@ru.is")
-        problem = "How do I make a sequence diagram?"
+        problem = "How do I make a diagram?"
         result = user.post_problem(problem, "")  
         self.assertFalse(result)
         for user in user.friends:

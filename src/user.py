@@ -33,12 +33,12 @@ class User:
         """
         if problem == "":
             return False
-        elif visible_to != "Everyone" or visible_to != "Friends":
-            return False
         elif self.email == "":
             return False
         
         else:
+            if visible_to != "Everyone" and visible_to != "Friends":
+                return False
             post = f"""
             Posted by {self.username}
             Problem : {problem}
@@ -59,3 +59,12 @@ class User:
 
 
 
+user1 = User("Katrín")
+user2 = User("hera")
+user = User("Arna", "Student", [],"arna", [],[user1, user2], "arna")
+problem ="how "
+result = user.post_problem(problem, "")
+print(result)
+for friend in user.friends:
+    if problem in friend.feed:
+        print(True)
