@@ -6,3 +6,6 @@ able to help students better understand the course.
 
 2. As a user I want to make a study group of people that are f.x in the same courses, add new people 
 and remove people from the group, to be able to study and talk about the material to make the course easier.
+
+
+3. As a user, I want to post various study problems, so that other users can help me solve them.
