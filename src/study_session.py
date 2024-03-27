@@ -36,7 +36,7 @@ class StudySession:
             print("The instructor for the studysession needs to be a TA!")
         elif type(self.date) != datetime and type(self.time) != datetime:
             print("The date and time need to be valid!")
-        elif self.duration.isalpha() == True:
+        elif type(self.duration) == str:
             print("The duration should be a number!")
         elif len(self.students) > self.max_students:
             print("There are to many students already signed up for the study session!")
@@ -44,7 +44,8 @@ class StudySession:
             print("The price is not valid!")
         else:
             self.advertise_status = "Advertised"
-            print(f"""{self.subject}
+            print(f"""
+            {self.subject}
             {self.description}
             When :{self.date}, {self.time}
             Where : {self.location}

@@ -14,7 +14,7 @@ class StudyGroup:
 
 
     @classmethod
-    def make_study_group(cls, course, name, members, admin, description, max_members):
+    def make_study_group(cls, course, name, members, admin, description, max_members = 100):
         """Makes sure all the parameters have valid values. If not the function returns False,
         otherwise it makes an instance of a StudyGroup.
 
@@ -29,8 +29,8 @@ class StudyGroup:
         Returns:
             bool or Studygroup: False or an istance of the Studygroup class.
         """
-        if name == "" or description == "":
-            print("The studygroup needs to have a valid name and description!")
+        if name == "" or description == "" or course == "":
+            print("The studygroup needs to have a valid course, name and description!")
             return False
         elif len(members) > max_members:
             print("There are two many members in this group!")
@@ -43,4 +43,45 @@ class StudyGroup:
                 members.remove(user)
         return cls(course, name, members, admin, description, max_members)
         
+
+    def add_member(self, member : User):
+        """Adds a member to the members list of the study group. Checks if the member
+        is valid.
+
+        Args:
+            member (User): A member which is a User object.
+
+        Returns:
+            None: Returns None.
+        """
+        if type(member) != User:
+            return None
+        elif member in self.members:
+            return None
+        elif len(self.members) == self.max_members:
+            return None
+        elif self.course not in member.courses:
+            return None
+        else:
+            self.members.append(member)
+            return None
+
+
+
+    def remove_member(self, member : User):
+        """Removes a member from the members list of the study group.
+
+        Args:
+            member (User): A member which is a User object.
+
+        Returns:
+            None: Returns None.
+        """
+        if type(member) != User:
+            return None
+        elif member in self.members:
+            self.members.remove(member)
+            return None
+        else:
+            return None
 
