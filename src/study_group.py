@@ -2,19 +2,28 @@
 from user import *
 import typing
 
+
 class StudyGroup:
-    def __init__(self,  course = "",name = "", members : list[User]= [], admin : User = "", description = "", max_members = 100):
+    def __init__(
+        self,
+        course="",
+        name="",
+        members: list[User] = [],
+        admin: User = "",
+        description="",
+        max_members=100,
+    ):
         self.course = course
         self.name = name
         self.members = members
         self.admin = admin
         self.description = description
         self.max_members = max_members
-        
-
 
     @classmethod
-    def make_study_group(cls, course, name, members, admin, description, max_members = 100):
+    def make_study_group(
+        cls, course, name, members, admin, description, max_members=100
+    ):
         """Makes sure all the parameters have valid values. If not the function returns False,
         otherwise it makes an instance of a StudyGroup.
 
@@ -42,9 +51,8 @@ class StudyGroup:
             if course not in user.courses:
                 members.remove(user)
         return cls(course, name, members, admin, description, max_members)
-        
 
-    def add_member(self, member : User):
+    def add_member(self, member: User):
         """Adds a member to the members list of the study group. Checks if the member
         is valid.
 
@@ -66,9 +74,7 @@ class StudyGroup:
             self.members.append(member)
             return None
 
-
-
-    def remove_member(self, member : User):
+    def remove_member(self, member: User):
         """Removes a member from the members list of the study group.
 
         Args:
@@ -84,4 +90,3 @@ class StudyGroup:
             return None
         else:
             return None
-
