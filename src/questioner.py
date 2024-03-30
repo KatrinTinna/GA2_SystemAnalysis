@@ -29,41 +29,55 @@ class Questioner:
         self.user = user
         self.quest_for_questioner = quest_for_questioner
 
-    def _answer_questioner(self):
+    def _answer_questioner(self, answers=[]):
+        if len(answers) < len(self.quest_for_questioner) and len(answers) != 0:
+            print("Please answer all the questions provided")
+            return False
+        elif len(answers) > len(self.quest_for_questioner):
+            print("Questions answered were too many")
+            return False
+
         for index, quest in enumerate(self.quest_for_questioner):
-            valid_answer = False
-            while not valid_answer:
-                answer = input(f"{index + 1}. {quest} \n")
-                if answer == "":
-                    print("Please answer the question")
-                else:
-                    valid_answer = True
+            if len(answers) == len(self.quest_for_questioner):
+                answer = answers[index]
+            else:
+                valid_answer = False
+                while not valid_answer:
+                    answer = input(f"{index + 1}. {quest} \n")
+                    if answer == "":
+                        print("Please answer the question")
+                    else:
+                        valid_answer = True
             self.questioner[quest] = answer
         Questioner.all_questioners.append(self)
+        return True
 
-    def _view_questioner(self, other: "Questioner"):
+    def _view_questioner(self, other: "Questioner" = None):
         questioner_str = ""
-        if other.questioner == {}:
+        if other is None or other.questioner == {}:
             print("There is no questioner to view")
-            return
+            return False
         for index, (quest, answer) in enumerate(other.questioner.items()):
             questioner_str += f"{index + 1}. {quest} \nAnswer: {answer} \n"
         return questioner_str
 
-    def _send_questioner(self, user_to: User = None):
+    def _send_questioner(self, user_to: User = None, message=""):
         "Send questioner to other user"
         if self.questioner == {}:
             print("There is no questioner to send")
-            return
-        if self.user == None or user_to == None:
-            print("The users for this questionaire are not valid please try again")
-        message = input("Please enter the message for this questioner\n")
+            return False
+        if not isinstance(self.user, User) or not isinstance(user_to, User):
+            print("The users for this questionnaire are not valid please try again")
+            return False
+        if message == "":
+            message = input("Please enter the message for this questionnaire\n")
         user_to.feed.append(
             f"From:{self.user.username}\nMessage:{message}\n\n{self._view_questioner(self)}"
         )
+        return True
 
 
-user1 = User("Katrín")
+"""user1 = User("Katrín")
 user2 = User("hera")
 user = User("Arna", "Student", [], "arna", [], [user1, user2], "arna")
 questioner1 = Questioner(user)
@@ -75,4 +89,4 @@ questioner2._view_questioner(questioner2)
 questioner2._send_questioner(user)
 for i in user.feed:
     print(i)
-print(len(Questioner.all_questioners))
+print(len(Questioner.all_questioners))"""
