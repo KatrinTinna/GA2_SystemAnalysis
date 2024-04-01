@@ -58,7 +58,7 @@ class Questioner:
             print("There is no questioner to view")
             return False
         for index, (quest, answer) in enumerate(other.questioner.items()):
-            questioner_str += f"{index + 1}. {quest} \nAnswer: {answer} \n"
+            questioner_str += f"{index + 1}. {quest}\nAnswer: {answer}\n"
         return questioner_str
 
     def _send_questioner(self, user_to: User = None, message=""):

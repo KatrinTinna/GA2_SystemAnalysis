@@ -10,7 +10,7 @@ class TestQuestioner(unittest.TestCase):
     def test_answering_questioner(self):
         """Tests if answering questioner was succesfull."""
         questioner1 = Questioner(
-            [
+            quest_for_questioner=[
                 "What is your DJ name?",
                 "What was your last Netflix binge?",
                 "Would you rather always be two hours early or 20 minutes late?",
@@ -25,14 +25,14 @@ class TestQuestioner(unittest.TestCase):
                 "20 minutes late",
                 "Water bottle, fishing pole, campus",
                 "Dancing Queen",
-            ]
+            ],
         )
         self.assertIn(questioner1, Questioner.all_questioners)
 
     def test_view_questioner(self):
         """Tests viewing a questioner."""
         questioner = Questioner(
-            [
+            quest_for_questioner=[
                 "What is your DJ name?",
                 "What was your last Netflix binge?",
                 "Would you rather always be two hours early or 20 minutes late?",
@@ -49,7 +49,7 @@ class TestQuestioner(unittest.TestCase):
                 "Dancing Queen",
             ]
         )
-        expected_result = "1. What is your DJ name?\nAnswer: DJ Anns\n2. What was your last Netflix binge?\nAnswer: Gossip Girl\n3. Would you rather always be two hours early or 20 minutes late?\nAnswer: 20 minutes late\n4. What three items would you bring with you on a deserted island?\nAnswer: Water bottle, fishing pole, campus\n5. What is your go-to karaoke song?\nAnswer: Dancing Queen"
+        expected_result = "1. What is your DJ name?\nAnswer: DJ Anns\n2. What was your last Netflix binge?\nAnswer: Gossip Girl\n3. Would you rather always be two hours early or 20 minutes late?\nAnswer: 20 minutes late\n4. What three items would you bring with you on a deserted island?\nAnswer: Water bottle, fishing pole, campus\n5. What is your go-to karaoke song?\nAnswer: Dancing Queen\n"
         result = questioner._view_questioner(questioner)
         self.maxDiff = None
         self.assertEqual(expected_result, result)
@@ -151,7 +151,7 @@ class TestQuestioner(unittest.TestCase):
         """Tests sending a questioner from no user."""
         user_to = User("Hanna")
         questioner = Questioner(
-            [
+            quest_for_questioner=[
                 "What is your DJ name?",
                 "What was your last Netflix binge?",
                 "Would you rather always be two hours early or 20 minutes late?",
@@ -205,12 +205,17 @@ class TestQuestioner(unittest.TestCase):
             ]
         )
         message = "Hi"
-        questioner._send_questioner(None, message)
+        questioner._send_questioner(message=message)
         result = f"From:{user.username}\nMessage:{message}\n\n{questioner._view_questioner(questioner)}"
+        print(f"user feed: {user_to.feed}")
+        print(result in user_to.feed)
+        result1 = "Fokk off"
         self.assertNotIn(result, user_to.feed)
 
 
 if __name__ == "__main__":
+    test = TestQuestioner()
+    test.test_send_questioner_unsuccessful()
     cov = coverage.Coverage()
     cov.start()
 
