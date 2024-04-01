@@ -1,16 +1,15 @@
 import unittest
 from user import User
-from questioner import Questioner
-import coverage
+from questionnaire import Questionnaire
 
 
-class TestQuestioner(unittest.TestCase):
-    """This class will test if the Questioner feature is working correctly."""
+class Testquestionnaire(unittest.TestCase):
+    """This class will test if the questionnaire feature is working correctly."""
 
-    def test_answering_questioner(self):
-        """Tests if answering questioner was succesfull."""
-        questioner1 = Questioner(
-            quest_for_questioner=[
+    def test_answering_questionnaire(self):
+        """Tests if answering questionnaire was succesfull."""
+        questionnaire1 = Questionnaire(
+            quest_for_questionnaire=[
                 "What is your DJ name?",
                 "What was your last Netflix binge?",
                 "Would you rather always be two hours early or 20 minutes late?",
@@ -18,7 +17,7 @@ class TestQuestioner(unittest.TestCase):
                 "What is your go-to karaoke song?",
             ],
         )
-        questioner1._answer_questioner(
+        questionnaire1._answer_questionnaire(
             [
                 "DJ Anns",
                 "Gossip Girl",
@@ -27,12 +26,11 @@ class TestQuestioner(unittest.TestCase):
                 "Dancing Queen",
             ],
         )
-        self.assertIn(questioner1, Questioner.all_questioners)
+        self.assertIn(questionnaire1, questionnaire1.all_questionnaires)
 
-    def test_view_questioner(self):
-        """Tests viewing a questioner."""
-        questioner = Questioner(
-            quest_for_questioner=[
+    def test_answering_questionnaire_to_many_answer(self):
+        questionnaire1 = Questionnaire(
+            quest_for_questionnaire=[
                 "What is your DJ name?",
                 "What was your last Netflix binge?",
                 "Would you rather always be two hours early or 20 minutes late?",
@@ -40,7 +38,50 @@ class TestQuestioner(unittest.TestCase):
                 "What is your go-to karaoke song?",
             ],
         )
-        questioner._answer_questioner(
+        result = questionnaire1._answer_questionnaire(
+            [
+                "DJ Anns",
+                "Gossip Girl",
+                "20 minutes late",
+                "Water bottle, fishing pole, campus",
+                "Dancing Queen",
+                "Soccer",
+            ],
+        )
+        self.assertFalse(result)
+
+    def test_answering_questionnaire_not_enough_answers(self):
+        questionnaire1 = Questionnaire(
+            quest_for_questionnaire=[
+                "What is your DJ name?",
+                "What was your last Netflix binge?",
+                "Would you rather always be two hours early or 20 minutes late?",
+                "What three items would you bring with you on a deserted island?",
+                "What is your go-to karaoke song?",
+            ],
+        )
+        result = questionnaire1._answer_questionnaire(
+            [
+                "DJ Anns",
+                "Gossip Girl",
+                "20 minutes late",
+                "Water bottle, fishing pole, campus",
+            ],
+        )
+        self.assertFalse(result)
+
+    def test_view_questionnaire(self):
+        """Tests viewing a questionnaire."""
+        questionnaire = Questionnaire(
+            quest_for_questionnaire=[
+                "What is your DJ name?",
+                "What was your last Netflix binge?",
+                "Would you rather always be two hours early or 20 minutes late?",
+                "What three items would you bring with you on a deserted island?",
+                "What is your go-to karaoke song?",
+            ],
+        )
+        questionnaire._answer_questionnaire(
             [
                 "DJ Anns",
                 "Gossip Girl",
@@ -50,27 +91,27 @@ class TestQuestioner(unittest.TestCase):
             ]
         )
         expected_result = "1. What is your DJ name?\nAnswer: DJ Anns\n2. What was your last Netflix binge?\nAnswer: Gossip Girl\n3. Would you rather always be two hours early or 20 minutes late?\nAnswer: 20 minutes late\n4. What three items would you bring with you on a deserted island?\nAnswer: Water bottle, fishing pole, campus\n5. What is your go-to karaoke song?\nAnswer: Dancing Queen\n"
-        result = questioner._view_questioner(questioner)
+        result = questionnaire._view_questionnaire(questionnaire)
         self.maxDiff = None
         self.assertEqual(expected_result, result)
 
-    def test_view_no_questioner(self):
-        """Tests viewing a questioner which is not an instance of the Questioner class."""
-        questioner = Questioner()
-        result = questioner._view_questioner()
+    def test_view_no_questionnaire(self):
+        """Tests viewing a questionnaire which is not an instance of the questionnaire class."""
+        questionnaire = Questionnaire()
+        result = questionnaire._view_questionnaire()
         self.assertFalse(result)
 
-    def test_view_empty_questioner(self):
-        """Tests viewing a empty questioner."""
-        questioner = Questioner()
-        result = questioner._view_questioner(questioner)
+    def test_view_empty_questionnaire(self):
+        """Tests viewing a empty questionnaire."""
+        questionnaire = Questionnaire()
+        result = questionnaire._view_questionnaire(questionnaire)
         self.assertFalse(result)
 
-    def test_send_questioner(self):
-        """Tests sending a questioner."""
+    def test_send_questionnaire(self):
+        """Tests sending a questionnaire."""
         user = User("Anna")
         user_to = User("Halla")
-        questioner = Questioner(
+        questionnaire = Questionnaire(
             user,
             [
                 "What is your DJ name?",
@@ -80,7 +121,7 @@ class TestQuestioner(unittest.TestCase):
                 "What is your go-to karaoke song?",
             ],
         )
-        questioner._answer_questioner(
+        questionnaire._answer_questionnaire(
             [
                 "DJ Anns",
                 "Gossip Girl",
@@ -90,14 +131,14 @@ class TestQuestioner(unittest.TestCase):
             ]
         )
         message = "Hi"
-        result = questioner._send_questioner(user_to, message)
+        result = questionnaire._send_questionnaire(user_to, message)
         self.assertTrue(result)
 
-    def test_send_questioner_feed(self):
-        """Tests when sending a questioner if it appears on the user's feed"""
+    def test_send_questionnaire_feed(self):
+        """Tests when sending a questionnaire if it appears on the user's feed"""
         user = User("Anna")
         user_to = User("Halla")
-        questioner = Questioner(
+        questionnaire = Questionnaire(
             user,
             [
                 "What is your DJ name?",
@@ -107,7 +148,7 @@ class TestQuestioner(unittest.TestCase):
                 "What is your go-to karaoke song?",
             ],
         )
-        questioner._answer_questioner(
+        questionnaire._answer_questionnaire(
             [
                 "DJ Anns",
                 "Gossip Girl",
@@ -117,14 +158,14 @@ class TestQuestioner(unittest.TestCase):
             ]
         )
         message = "Hi"
-        questioner._send_questioner(user_to, message)
-        result = f"From:{user.username}\nMessage:{message}\n\n{questioner._view_questioner(questioner)}"
+        questionnaire._send_questionnaire(user_to, message)
+        result = f"From:{user.username}\nMessage:{message}\n\n{questionnaire._view_questionnaire(questionnaire)}"
         self.assertIn(result, user.feed)
 
-    def test_send_questioner_no_to_user(self):
-        """Tests sending a questioner with no user to send to."""
+    def test_send_questionnaire_no_to_user(self):
+        """Tests sending a questionnaire with no user to send to."""
         user = User("Anna")
-        questioner = Questioner(
+        questionnaire = Questionnaire(
             user,
             [
                 "What is your DJ name?",
@@ -134,7 +175,7 @@ class TestQuestioner(unittest.TestCase):
                 "What is your go-to karaoke song?",
             ],
         )
-        questioner._answer_questioner(
+        questionnaire._answer_questionnaire(
             [
                 "DJ Anns",
                 "Gossip Girl",
@@ -144,14 +185,14 @@ class TestQuestioner(unittest.TestCase):
             ]
         )
         message = "Hi"
-        result = questioner._send_questioner(None, message)
+        result = questionnaire._send_questionnaire(message=message)
         self.assertFalse(result)
 
-    def test_send_questioner_no_user(self):
-        """Tests sending a questioner from no user."""
+    def test_send_questionnaire_no_user(self):
+        """Tests sending a questionnaire from no user."""
         user_to = User("Hanna")
-        questioner = Questioner(
-            quest_for_questioner=[
+        questionnaire = Questionnaire(
+            quest_for_questionnaire=[
                 "What is your DJ name?",
                 "What was your last Netflix binge?",
                 "Would you rather always be two hours early or 20 minutes late?",
@@ -159,7 +200,7 @@ class TestQuestioner(unittest.TestCase):
                 "What is your go-to karaoke song?",
             ],
         )
-        questioner._answer_questioner(
+        questionnaire._answer_questionnaire(
             [
                 "DJ Anns",
                 "Gossip Girl",
@@ -169,57 +210,18 @@ class TestQuestioner(unittest.TestCase):
             ]
         )
         message = "Hi"
-        result = questioner._send_questioner(user_to, message)
+        result = questionnaire._send_questionnaire(user_to, message)
         self.assertFalse(result)
 
-    def test_send_empty_questioner(self):
-        """Tests sending a empty questioner."""
+    def test_send_empty_questionnaire(self):
+        """Tests sending a empty questionnaire."""
         user = User("Anna")
         user_to = User("Halla")
-        questioner = Questioner(user)
+        questionnaire = Questionnaire(user)
         message = "Hi"
-        result = questioner._send_questioner(user_to, message)
+        result = questionnaire._send_questionnaire(user_to, message)
         self.assertFalse(result)
-
-    def test_send_questioner_unsuccessful(self):
-        """Tests if when sending a questioner was unsuccessful if it still appears on the users feed"""
-        user = User("Anna")
-        user_to = User("Halla")
-        questioner = Questioner(
-            user,
-            [
-                "What is your DJ name?",
-                "What was your last Netflix binge?",
-                "Would you rather always be two hours early or 20 minutes late?",
-                "What three items would you bring with you on a deserted island?",
-                "What is your go-to karaoke song?",
-            ],
-        )
-        questioner._answer_questioner(
-            [
-                "DJ Anns",
-                "Gossip Girl",
-                "20 minutes late",
-                "Water bottle, fishing pole, campus",
-                "Dancing Queen",
-            ]
-        )
-        message = "Hi"
-        questioner._send_questioner(message=message)
-        result = f"From:{user.username}\nMessage:{message}\n\n{questioner._view_questioner(questioner)}"
-        self.assertNotIn(result, user_to.feed)
 
 
 if __name__ == "__main__":
-    test = TestQuestioner()
-    test.test_send_questioner_unsuccessful()
-    cov = coverage.Coverage()
-    cov.start()
-
     unittest.main()
-
-    cov.stop()
-    cov.save()
-
-    cov.html_report()
-    print("Done.")
