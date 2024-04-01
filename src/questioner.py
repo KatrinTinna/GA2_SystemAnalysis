@@ -50,6 +50,7 @@ class Questioner:
                         valid_answer = True
             self.questioner[quest] = answer
         Questioner.all_questioners.append(self)
+        print("The questionnaire has been successfully answered")
         return True
 
     def _view_questioner(self, other: "Questioner" = None):
@@ -74,6 +75,7 @@ class Questioner:
         user_to.feed.append(
             f"From:{self.user.username}\nMessage:{message}\n\n{self._view_questioner(self)}"
         )
+        print(f"The questionnaire has been successfully send to {user_to.username}")
         return True
 
 

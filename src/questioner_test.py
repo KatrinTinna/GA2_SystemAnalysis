@@ -207,9 +207,6 @@ class TestQuestioner(unittest.TestCase):
         message = "Hi"
         questioner._send_questioner(message=message)
         result = f"From:{user.username}\nMessage:{message}\n\n{questioner._view_questioner(questioner)}"
-        print(f"user feed: {user_to.feed}")
-        print(result in user_to.feed)
-        result1 = "Fokk off"
         self.assertNotIn(result, user_to.feed)
 
 
