@@ -29,6 +29,7 @@ class Testquestionnaire(unittest.TestCase):
         self.assertIn(questionnaire1, questionnaire1.all_questionnaires)
 
     def test_answering_questionnaire_to_many_answer(self):
+        "Tests answering a questionnaire with too many answers"
         questionnaire1 = Questionnaire(
             quest_for_questionnaire=[
                 "What is your DJ name?",
@@ -51,6 +52,7 @@ class Testquestionnaire(unittest.TestCase):
         self.assertFalse(result)
 
     def test_answering_questionnaire_not_enough_answers(self):
+        "Tests answering a questionnaire without answering all the questions"
         questionnaire1 = Questionnaire(
             quest_for_questionnaire=[
                 "What is your DJ name?",
