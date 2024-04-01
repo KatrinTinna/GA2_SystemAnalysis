@@ -9,3 +9,6 @@ and remove people from the group, to be able to study and talk about the materia
 
 
 3. As a user, I want to post various study problems, so that other users can help me solve them.
+
+
+4. As a user, I want to have the option of answering a list of questions, so that me and my study buddy can get to know each other before studying together.
