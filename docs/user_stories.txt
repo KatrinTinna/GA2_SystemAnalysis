@@ -1,14 +1,16 @@
 This text file contains a list of the 4 user stories chosen for implementation and testing.
 
-1. As a user I want to be able to register as a teacher and advertise private lessons to be 
+GA2_US1:
+As a user I want to be able to register as a teacher and advertise private lessons to be 
 able to help students better understand the course.
 
-
-2. As a user I want to make a study group of people that are f.x in the same courses, add new people 
+GA2_US2:
+As a user I want to make a study group of people that are f.x in the same courses, add new people 
 and remove people from the group, to be able to study and talk about the material to make the course easier.
 
+GA2_US3:
+As a user, I want to post various study problems, so that other users can help me solve them.
 
-3. As a user, I want to post various study problems, so that other users can help me solve them.
-
-
-4. As a user, I want to have the option of answering a list of questions, so that me and my study buddy can get to know each other before studying together.
+GA2_US4:
+As a user, I want to have the option of answering a list of questions, so that me and my study 
+buddy can get to know each other before studying together.
