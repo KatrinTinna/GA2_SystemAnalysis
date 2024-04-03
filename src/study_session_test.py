@@ -1,8 +1,5 @@
 #!/bin/python3.11
-
 from user import User
-# import sys
-# sys.path.insert(0, "/Users/katrintinna/Documents/HR/1_ar_vor/Kerfisgreining og kerfishönnun/GA2/src")
 from study_session import StudySession
 import unittest
 import datetime

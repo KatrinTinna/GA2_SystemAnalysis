@@ -1,5 +1,4 @@
 #!/bin/python3.11
-
 class User:
     all_users = []
     def __init__(self, name = "", role = "Student", courses = [],username = "",feed = [], friends = [], email = "",id = 0, password = ""):

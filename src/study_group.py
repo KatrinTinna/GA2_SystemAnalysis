@@ -1,6 +1,5 @@
 #!/bin/python3.11
 from user import *
-import typing
 
 
 class StudyGroup:

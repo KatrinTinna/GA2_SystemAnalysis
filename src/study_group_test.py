@@ -2,12 +2,6 @@
 
 import unittest
 import coverage
-# from pathlib import Path
-# import sys
-# sys.path.insert(0, "/Users/katrintinna/Documents/HR/1_ar_vor/Kerfisgreining og kerfishönnun/GA2/src")
-# parent_dir = Path(__file__).resolve().parent.parent
-# src_file = parent_dir / 'src'
-# sys.path.append(str(src_file))
 from study_group import StudyGroup
 from user import User
 

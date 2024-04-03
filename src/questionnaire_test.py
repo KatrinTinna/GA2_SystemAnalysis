@@ -1,7 +1,8 @@
+#!/bin/python3.11
 import unittest
 from user import User
-from questionnaire import Questionnaire
-
+from questionnaire import *
+import coverage
 
 class Testquestionnaire(unittest.TestCase):
     """This class will test if the questionnaire feature is working correctly."""
@@ -225,5 +226,16 @@ class Testquestionnaire(unittest.TestCase):
         self.assertFalse(result)
 
 
+# if __name__ == "__main__":
+#     unittest.main()
 if __name__ == "__main__":
+    cov = coverage.Coverage()
+    cov.start()
+
     unittest.main()
+
+    cov.stop()
+    cov.save()
+
+    cov.html_report()
+    print("Done.")

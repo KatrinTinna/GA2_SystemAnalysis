@@ -1,6 +1,7 @@
 #!/bin/python3.11
 from user import User
 import unittest
+
 class TestPostProblem(unittest.TestCase):
     """"This class will test if the Post problem feature is working correctly."""
 

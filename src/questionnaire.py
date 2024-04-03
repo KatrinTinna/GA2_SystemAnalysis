@@ -1,3 +1,4 @@
+#!/bin/python3.11
 import random
 from user import *
 
@@ -33,7 +34,7 @@ class Questionnaire:
         """Adds a questionnaire with answers to list of all questionnaires.
 
         Args:
-            answers (lst): A list consisting of all the answers to the questionnaire. Defaults to empty list
+            answers (list): A list consisting of all the answers to the questionnaire. Defaults to an empty list.
 
         Returns:
             bool: Returns True if the questionnaire was successfully added, else returns False.
@@ -85,7 +86,7 @@ class Questionnaire:
 
         Args:
             user_to (User): Instance of User representing the user to send to. Defaults to None
-            message(str): A string representing the message to include with the questionnaire
+            message (str): A string representing the message to include with the questionnaire
 
         Returns:
             bool: Returns True if the questionnaire was successfully sent, else returns False.

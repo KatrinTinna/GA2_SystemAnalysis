@@ -1,6 +1,4 @@
 #!/bin/python3.11
-
-import typing
 from datetime import *
 from user import *
 
@@ -50,7 +48,7 @@ class StudySession:
             When :{self.date}, {self.time}
             Where : {self.location}
             Spots available : {self.max_students - len(self.students)}
-            TA : {self.TA}
+            TA : {self.TA.name}
             Email me to join! {self.TA.email}""")
 
 
