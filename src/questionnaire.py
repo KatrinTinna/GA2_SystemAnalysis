@@ -30,7 +30,7 @@ class Questionnaire:
         self.user = user
         self.quest_for_questionnaire = quest_for_questionnaire
 
-    def _answer_questionnaire(self, answers=[]):
+    def _answer_questionnaire(self, answers=[]) -> bool:
         """Adds a questionnaire with answers to list of all questionnaires.
 
         Args:
@@ -65,7 +65,7 @@ class Questionnaire:
         return True
 
     def _view_questionnaire(self, other: "Questionnaire" = None):
-        """Makes a list with questionnaire and answers to print.
+        """Makes a string with a questionnaire and answers to print.
 
         Args:
             other (Questionnaire): Instance of Questionnaire representing the questionnaire to view. Defaults to None
@@ -81,12 +81,14 @@ class Questionnaire:
             questionnaire_str += f"{index + 1}. {quest}\nAnswer: {answer}\n"
         return questionnaire_str
 
-    def _send_questionnaire(self, user_to: User = None, message=""):
-        """Sends questionnaire to other user.
+    def _send_questionnaire(self, recipient: User = None, message="") -> bool:
+        """Sends questionnaire to another user.
 
         Args:
             user_to (User): Instance of User representing the user to send to. Defaults to None
             message (str): A string representing the message to include with the questionnaire
+            recipient (User): Instance of User representing the user to send to. Defaults to None
+            message(str): A string representing the message to include with the questionnaire. Defaults to empty sring
 
         Returns:
             bool: Returns True if the questionnaire was successfully sent, else returns False.
@@ -94,13 +96,13 @@ class Questionnaire:
         if self.questionnaire == {}:
             print("There is no questionnaire to send")
             return False
-        if not isinstance(self.user, User) or not isinstance(user_to, User):
+        if not isinstance(self.user, User) or not isinstance(recipient, User):
             print("The users for this questionnaire are not valid please try again")
             return False
         if message == "":
             message = input("Please enter the message for this questionnaire\n")
-        user_to.feed.append(
+        recipient.feed.append(
             f"From:{self.user.username}\nMessage:{message}\n\n{self._view_questionnaire(self)}"
         )
-        print(f"The questionnaire has been successfully sent to {user_to.username}")
+        print(f"The questionnaire has been successfully sent to {recipient.username}")
         return True

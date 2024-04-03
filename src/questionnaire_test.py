@@ -29,8 +29,8 @@ class Testquestionnaire(unittest.TestCase):
         )
         self.assertIn(questionnaire1, questionnaire1.all_questionnaires)
 
-    def test_answering_questionnaire_to_many_answer(self):
-        "Tests answering a questionnaire with too many answers"
+    def test_answering_questionnaire_too_many_answer(self):
+        """Tests answering a questionnaire with too many answers."""
         questionnaire1 = Questionnaire(
             quest_for_questionnaire=[
                 "What is your DJ name?",
@@ -105,17 +105,17 @@ class Testquestionnaire(unittest.TestCase):
         self.assertFalse(result)
 
     def test_view_empty_questionnaire(self):
-        """Tests viewing a empty questionnaire."""
+        """Tests viewing an empty questionnaire."""
         questionnaire = Questionnaire()
         result = questionnaire._view_questionnaire(questionnaire)
         self.assertFalse(result)
 
     def test_send_questionnaire(self):
         """Tests sending a questionnaire."""
-        user = User("Anna")
-        user_to = User("Halla")
+        sender = User("Anna")
+        recipient = User("Halla")
         questionnaire = Questionnaire(
-            user,
+            sender,
             [
                 "What is your DJ name?",
                 "What was your last Netflix binge?",
@@ -134,15 +134,15 @@ class Testquestionnaire(unittest.TestCase):
             ]
         )
         message = "Hi"
-        result = questionnaire._send_questionnaire(user_to, message)
+        result = questionnaire._send_questionnaire(recipient, message)
         self.assertTrue(result)
 
     def test_send_questionnaire_feed(self):
-        """Tests when sending a questionnaire if it appears on the user's feed"""
-        user = User("Anna")
-        user_to = User("Halla")
+        """Tests when sending a questionnaire if it appears on the recipient's feed"""
+        sender = User("Anna")
+        recipient = User("Halla")
         questionnaire = Questionnaire(
-            user,
+            sender,
             [
                 "What is your DJ name?",
                 "What was your last Netflix binge?",
@@ -161,15 +161,15 @@ class Testquestionnaire(unittest.TestCase):
             ]
         )
         message = "Hi"
-        questionnaire._send_questionnaire(user_to, message)
-        result = f"From:{user.username}\nMessage:{message}\n\n{questionnaire._view_questionnaire(questionnaire)}"
-        self.assertIn(result, user.feed)
+        questionnaire._send_questionnaire(recipient, message)
+        result = f"From:{sender.username}\nMessage:{message}\n\n{questionnaire._view_questionnaire(questionnaire)}"
+        self.assertIn(result, recipient.feed)
 
-    def test_send_questionnaire_no_to_user(self):
-        """Tests sending a questionnaire with no user to send to."""
-        user = User("Anna")
+    def test_send_questionnaire_no_recipient(self):
+        """Tests sending a questionnaire with no recipient."""
+        sender = User("Anna")
         questionnaire = Questionnaire(
-            user,
+            sender,
             [
                 "What is your DJ name?",
                 "What was your last Netflix binge?",
@@ -193,7 +193,7 @@ class Testquestionnaire(unittest.TestCase):
 
     def test_send_questionnaire_no_user(self):
         """Tests sending a questionnaire from no user."""
-        user_to = User("Hanna")
+        recipient = User("Hanna")
         questionnaire = Questionnaire(
             quest_for_questionnaire=[
                 "What is your DJ name?",
@@ -213,16 +213,16 @@ class Testquestionnaire(unittest.TestCase):
             ]
         )
         message = "Hi"
-        result = questionnaire._send_questionnaire(user_to, message)
+        result = questionnaire._send_questionnaire(recipient, message)
         self.assertFalse(result)
 
     def test_send_empty_questionnaire(self):
-        """Tests sending a empty questionnaire."""
-        user = User("Anna")
-        user_to = User("Halla")
-        questionnaire = Questionnaire(user)
+        """Tests sending an empty questionnaire."""
+        sender = User("Anna")
+        recipient = User("Halla")
+        questionnaire = Questionnaire(sender)
         message = "Hi"
-        result = questionnaire._send_questionnaire(user_to, message)
+        result = questionnaire._send_questionnaire(recipient, message)
         self.assertFalse(result)
 
 
