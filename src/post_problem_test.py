@@ -1,6 +1,7 @@
 #!/bin/python3.11
 from user import User
 import unittest
+import coverage
 
 class TestPostProblem(unittest.TestCase):
     """"This class will test if the Post problem feature is working correctly."""
@@ -78,4 +79,14 @@ class TestPostProblem(unittest.TestCase):
             self.assertNotIn(problem, user.feed)
 
 
-        
+if __name__ == "__main__":
+    cov = coverage.Coverage()
+    cov.start()
+
+    unittest.main()
+
+    cov.stop()
+    cov.save()
+
+    cov.html_report()
+    print("Done.")
